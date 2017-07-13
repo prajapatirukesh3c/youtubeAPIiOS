@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="l4s-LK-GQa">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="YTDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="U4s-Rt-rER">
+                                <rect key="frame" x="0.0" y="323" width="375" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="125" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wgi-OU-TSg">
+                                <rect key="frame" x="0.0" y="110" width="375" height="513"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="H1T-1W-1ME">
+                                <rect key="frame" x="87" y="631" width="200" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="550-ng-JYv"/>
+                                    <constraint firstAttribute="height" constant="28" id="gru-W0-CDk"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Channels"/>
+                                    <segment title="Videos"/>
+                                </segments>
+                                <connections>
+                                    <action selector="changeContent:" destination="BYZ-38-t0r" eventType="valueChanged" id="NqH-nR-JDr"/>
+                                </connections>
+                            </segmentedControl>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" textAlignment="natural" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="BLC-It-MhP">
+                                <rect key="frame" x="16" y="72" width="343" height="30"/>
+                                <color key="backgroundColor" red="0.74100510829999999" green="0.70844822959999998" blue="0.68824579649999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <accessibility key="accessibilityConfiguration" label="Search">
+                                    <accessibilityTraits key="traits" none="YES"/>
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="G9g-AI-uFH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="BLC-It-MhP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="3uL-Jt-Bvl"/>
+                            <constraint firstAttribute="trailing" secondItem="BLC-It-MhP" secondAttribute="trailing" constant="16" id="DmK-oR-5ed"/>
+                            <constraint firstItem="Wgi-OU-TSg" firstAttribute="top" secondItem="BLC-It-MhP" secondAttribute="bottom" constant="8" id="GTv-4M-fgz"/>
+                            <constraint firstItem="H1T-1W-1ME" firstAttribute="top" secondItem="Wgi-OU-TSg" secondAttribute="bottom" constant="8" id="O2I-Xv-20A"/>
+                            <constraint firstItem="BLC-It-MhP" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="PJz-JB-7P4"/>
+                            <constraint firstItem="Wgi-OU-TSg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="WvQ-FF-R3n"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="H1T-1W-1ME" secondAttribute="bottom" constant="8" id="j9j-v5-rz6"/>
+                            <constraint firstItem="H1T-1W-1ME" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="jzk-Ss-NwV"/>
+                            <constraint firstAttribute="trailing" secondItem="Wgi-OU-TSg" secondAttribute="trailing" id="tx9-e0-OpA"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="p6E-DT-xiE"/>
+                    <connections>
+                        <outlet property="searchTextField" destination="BLC-It-MhP" id="w5i-vw-GSR"/>
+                        <outlet property="segDisplayedContent" destination="H1T-1W-1ME" id="yEI-2O-IJ1"/>
+                        <outlet property="tblVideos" destination="Wgi-OU-TSg" id="Ydy-C5-IMg"/>
+                        <outlet property="viewWait" destination="U4s-Rt-rER" id="Tnr-HW-Mnq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-844" y="-7.6461769115442282"/>
+        </scene>
+        <!--Player View Controller-->
+        <scene sceneID="Ufh-Ie-8vt">
+            <objects>
+                <viewController storyboardIdentifier="PlayerViewController" id="EYu-PJ-nYB" customClass="PlayerViewController" customModule="YTDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="UQG-fa-IJd"/>
+                        <viewControllerLayoutGuide type="bottom" id="jjG-L9-cak"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3aG-Mb-HHv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4ke-sL-A5J" customClass="YTPlayerView">
+                                <rect key="frame" x="0.0" y="47" width="375" height="182"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="playerView" destination="4ke-sL-A5J" id="PQ1-Hg-UhA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pU0-X5-tv4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-66.400000000000006" y="-25.637181409295355"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="jeo-Zw-TNa">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="l4s-LK-GQa" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5D0-cd-Q1f">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="qlX-rq-4cK"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YMt-oS-I42" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1783.2" y="-7.6461769115442282"/>
+        </scene>
+    </scenes>
+</document>
