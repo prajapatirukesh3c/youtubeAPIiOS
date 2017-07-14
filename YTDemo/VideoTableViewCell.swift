@@ -1,5 +1,5 @@
 //
-//  VideosTableViewCell.swift
+//  ChannelTableViewCell.swift
 //  YTDemo
 //
 //  Created by Rukesh Prajapati on 7/11/17.
@@ -8,9 +8,8 @@
 
 import UIKit
 
-class ChannelTableViewCell: UITableViewCell {
+class VideoTableViewCell: UITableViewCell {
   
   @IBOutlet weak var videoImage: UIImageView!
-  @IBOutlet weak var videoTitle: UILabel!
-  @IBOutlet weak var videoDesc: UILabel!
+  @IBOutlet weak var videoLabel: UILabel!  
 }

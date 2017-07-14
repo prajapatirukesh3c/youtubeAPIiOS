@@ -9,19 +9,16 @@
 import UIKit
 
 class PlayerViewController: UIViewController {
-
+  
+  @IBOutlet weak var playerView: YTPlayerView!
+  var videoID: String?
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
     
-    @IBOutlet weak var playerView: YTPlayerView!
-    var videoID: String?
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
-      guard let videoID = videoID else {
-        return
-      }
-      playerView.load(withVideoId: videoID)
+    guard let videoID = videoID else {
+      return
     }
-
+    playerView.load(withVideoId: videoID)
+  }
 }

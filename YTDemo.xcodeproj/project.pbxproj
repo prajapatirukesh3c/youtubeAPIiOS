@@ -13,10 +13,10 @@
 		5FF6B1EB1F148E570041430E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FF6B1E91F148E570041430E /* Main.storyboard */; };
 		5FF6B1ED1F148E570041430E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FF6B1EC1F148E570041430E /* Assets.xcassets */; };
 		5FF6B1F01F148E570041430E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FF6B1EE1F148E570041430E /* LaunchScreen.storyboard */; };
-		5FF6B1FA1F14BE380041430E /* VideosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF6B1F81F14BE380041430E /* VideosTableViewCell.swift */; };
-		5FF6B1FB1F14BE380041430E /* VideosTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FF6B1F91F14BE380041430E /* VideosTableViewCell.xib */; };
-		5FF6B1FE1F14E55D0041430E /* ChannelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF6B1FC1F14E55D0041430E /* ChannelTableViewCell.swift */; };
-		5FF6B1FF1F14E55D0041430E /* ChannelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FF6B1FD1F14E55D0041430E /* ChannelTableViewCell.xib */; };
+		5FF6B1FA1F14BE380041430E /* ChannelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF6B1F81F14BE380041430E /* ChannelTableViewCell.swift */; };
+		5FF6B1FB1F14BE380041430E /* ChannelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FF6B1F91F14BE380041430E /* ChannelTableViewCell.xib */; };
+		5FF6B1FE1F14E55D0041430E /* VideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF6B1FC1F14E55D0041430E /* VideoTableViewCell.swift */; };
+		5FF6B1FF1F14E55D0041430E /* VideoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FF6B1FD1F14E55D0041430E /* VideoTableViewCell.xib */; };
 		F051384A498EB5E2D9D61BDA /* Pods_YTDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4153CED80DD4804F604B695 /* Pods_YTDemo.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,10 +31,10 @@
 		5FF6B1EC1F148E570041430E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5FF6B1EF1F148E570041430E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5FF6B1F11F148E570041430E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5FF6B1F81F14BE380041430E /* VideosTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosTableViewCell.swift; sourceTree = "<group>"; };
-		5FF6B1F91F14BE380041430E /* VideosTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideosTableViewCell.xib; sourceTree = "<group>"; };
-		5FF6B1FC1F14E55D0041430E /* ChannelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelTableViewCell.swift; sourceTree = "<group>"; };
-		5FF6B1FD1F14E55D0041430E /* ChannelTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChannelTableViewCell.xib; sourceTree = "<group>"; };
+		5FF6B1F81F14BE380041430E /* ChannelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelTableViewCell.swift; sourceTree = "<group>"; };
+		5FF6B1F91F14BE380041430E /* ChannelTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChannelTableViewCell.xib; sourceTree = "<group>"; };
+		5FF6B1FC1F14E55D0041430E /* VideoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTableViewCell.swift; sourceTree = "<group>"; };
+		5FF6B1FD1F14E55D0041430E /* VideoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoTableViewCell.xib; sourceTree = "<group>"; };
 		87CD3941DDFF16C24F6AC1D6 /* Pods-YTDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YTDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-YTDemo/Pods-YTDemo.release.xcconfig"; sourceTree = "<group>"; };
 		C4153CED80DD4804F604B695 /* Pods_YTDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YTDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -74,11 +74,11 @@
 			children = (
 				5F57D94C1F16146900A0E8A5 /* YTDemo-Bridging-Header.h */,
 				5FF6B1E71F148E570041430E /* ViewController.swift */,
-				5FF6B1FC1F14E55D0041430E /* ChannelTableViewCell.swift */,
-				5FF6B1FD1F14E55D0041430E /* ChannelTableViewCell.xib */,
+				5FF6B1FC1F14E55D0041430E /* VideoTableViewCell.swift */,
+				5FF6B1FD1F14E55D0041430E /* VideoTableViewCell.xib */,
 				5FF6B1E91F148E570041430E /* Main.storyboard */,
-				5FF6B1F81F14BE380041430E /* VideosTableViewCell.swift */,
-				5FF6B1F91F14BE380041430E /* VideosTableViewCell.xib */,
+				5FF6B1F81F14BE380041430E /* ChannelTableViewCell.swift */,
+				5FF6B1F91F14BE380041430E /* ChannelTableViewCell.xib */,
 				5F57D94F1F162B8A00A0E8A5 /* PlayerViewController.swift */,
 				5FF6B1F71F148E730041430E /* Supporting files */,
 			);
@@ -176,9 +176,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5FF6B1FF1F14E55D0041430E /* ChannelTableViewCell.xib in Resources */,
+				5FF6B1FF1F14E55D0041430E /* VideoTableViewCell.xib in Resources */,
 				5FF6B1F01F148E570041430E /* LaunchScreen.storyboard in Resources */,
-				5FF6B1FB1F14BE380041430E /* VideosTableViewCell.xib in Resources */,
+				5FF6B1FB1F14BE380041430E /* ChannelTableViewCell.xib in Resources */,
 				5FF6B1ED1F148E570041430E /* Assets.xcassets in Resources */,
 				5FF6B1EB1F148E570041430E /* Main.storyboard in Resources */,
 			);
@@ -240,8 +240,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5FF6B1E81F148E570041430E /* ViewController.swift in Sources */,
-				5FF6B1FE1F14E55D0041430E /* ChannelTableViewCell.swift in Sources */,
-				5FF6B1FA1F14BE380041430E /* VideosTableViewCell.swift in Sources */,
+				5FF6B1FE1F14E55D0041430E /* VideoTableViewCell.swift in Sources */,
+				5FF6B1FA1F14BE380041430E /* ChannelTableViewCell.swift in Sources */,
 				5FF6B1E61F148E570041430E /* AppDelegate.swift in Sources */,
 				5F57D9501F162B8A00A0E8A5 /* PlayerViewController.swift in Sources */,
 			);
