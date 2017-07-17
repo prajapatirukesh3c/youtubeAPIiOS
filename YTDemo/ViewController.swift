@@ -49,8 +49,8 @@ class ViewController: UIViewController {
     
     let session = URLSession(configuration: sessionConfiguration)
     
-    let task = session.dataTask(with: request as URLRequest, completionHandler: { (data: Data!, response: URLResponse!, error: Error!) -> Void in
-      DispatchQueue.main.async(execute: { () -> Void in
+    let task = session.dataTask(with: request as URLRequest, completionHandler: { (data: Data!, response: URLResponse!, error: Error!) in
+      DispatchQueue.main.async(execute: {() in
         completion(data, (response as! HTTPURLResponse).statusCode, error)
       })
     })
@@ -62,38 +62,33 @@ class ViewController: UIViewController {
     var urlString: String!
     if !useChannelIDParam {
       urlString = "https://www.googleapis.com/youtube/v3/channels?part=contentDetails,snippet&forUsername=\(desiredChannelsArray[channelIndex])&key=\(apiKey)"
-    }
-    else {
+    } else {
       urlString = "https://www.googleapis.com/youtube/v3/channels?part=contentDetails,snippet&id=\(desiredChannelsArray[channelIndex])&key=\(apiKey)"
     }
     
-    let targetURL = NSURL(string: urlString)
+    guard let targetURL = NSURL(string: urlString) else { return }
     
-    
-    performGetRequest(targetURL: targetURL!, completion: { (data, HTTPStatusCode, error) -> Void in
+    performGetRequest(targetURL: targetURL, completion: { (data, HTTPStatusCode, error) in
       if HTTPStatusCode == 200 && error == nil {
         do {
-          guard let data = data else {
-            return
-          }
-          guard let resultsDict = try JSONSerialization.jsonObject(with: data, options: []) as? Dictionary<String, AnyObject> else {
-            return
-          }
+          guard let data = data else { return }
+          guard let resultsDict = try JSONSerialization.jsonObject(with: data, options: []) as? Dictionary<String, AnyObject> else { return }
           
-          guard let items: AnyObject = resultsDict["items"] as AnyObject? else {
-            return
-          }
+          guard let items: AnyObject = resultsDict["items"] as AnyObject? else { return }
           
-          let firstItemDict = (items as! Array<AnyObject>)[0] as! Dictionary<String, AnyObject>
-          let snippetDict = firstItemDict["snippet"] as! Dictionary<String, AnyObject>
+          guard let firstItemDict = (items as? Array<AnyObject>)?[0] as? Dictionary<String, AnyObject> else { return }
+          
+          guard let snippetDict = firstItemDict["snippet"] as? Dictionary<String, AnyObject> else { return }
           
           var desiredValuesDict: Dictionary<String, AnyObject> = Dictionary<String, AnyObject>()
           desiredValuesDict["title"] = snippetDict["title"]
           desiredValuesDict["description"] = snippetDict["description"]
-          desiredValuesDict["thumbnail"] = ((snippetDict["thumbnails"] as! Dictionary<String, AnyObject>)["default"] as! Dictionary<String, AnyObject>)["url"]
           
-          desiredValuesDict["playlistID"] = ((firstItemDict["contentDetails"] as! Dictionary<String, AnyObject>)["relatedPlaylists"] as! Dictionary<String, AnyObject>)["uploads"]
+          guard let thumbnail = ((snippetDict["thumbnails"] as? Dictionary<String, AnyObject>)? ["default"] as? Dictionary<String, AnyObject>)? ["url"] else { return }
+          desiredValuesDict["thumbnail"] = thumbnail
           
+          guard let playlistID = ((firstItemDict["contentDetails"] as? Dictionary<String, AnyObject>)?["relatedPlaylists"] as? Dictionary<String, AnyObject>)?["uploads"] else { return }
+          desiredValuesDict["playlistID"] = playlistID
           self.channelsDataArray.append(desiredValuesDict)
           self.tblVideos.reloadData()
           
@@ -101,15 +96,12 @@ class ViewController: UIViewController {
           self.channelIndex += 1
           if self.channelIndex < self.desiredChannelsArray.count {
             self.getChannelDetails(useChannelIDParam: useChannelIDParam)
-          }
-          else {
+          } else {
             self.viewWait.isHidden = true
           }
-          
         } catch {
           print(error.localizedDescription)
         }
-        
       } else {
         print("HTTP Status Code channel = \(HTTPStatusCode)")
         print("Error while loading channel details: \(String(describing: error))")
@@ -118,39 +110,33 @@ class ViewController: UIViewController {
   }
   
   func getVideosForChannelAtIndex(index: Int!) {
-    let playlistID = channelsDataArray[index]["playlistID"] as! String
+    guard let playlistID = channelsDataArray[index]["playlistID"] as? String else { return }
     
     let urlString = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=\(playlistID)&key=\(apiKey)"
     
-    guard let targetURL = NSURL(string: urlString) else {
-      return
-    }
+    guard let targetURL = NSURL(string: urlString) else { return }
     
     performGetRequest(targetURL: targetURL, completion: { (data, HTTPStatusCode, error) -> Void in
       if HTTPStatusCode == 200 && error == nil {
         do {
-          guard let data = data else {
-            return
-          }
-          guard let resultsDict = try JSONSerialization.jsonObject(with: data, options: []) as? Dictionary<String, AnyObject> else {
-            return
-          }
+          guard let data = data else { return }
+          guard let resultsDict = try JSONSerialization.jsonObject(with: data, options: []) as? Dictionary<String, AnyObject> else { return }
           
-          guard let items: Array<Dictionary<String, AnyObject>> = resultsDict["items"] as? Array<Dictionary<String, AnyObject>> else {
-            return
-          }
+          guard let items: Array<Dictionary<String, AnyObject>> = resultsDict["items"] as? Array<Dictionary<String, AnyObject>> else { return }
           for i in 0 ..< items.count {
             
-            guard let playlistSnippetDict = (items[i] as Dictionary<String, AnyObject>)["snippet"] as? Dictionary<String, AnyObject> else {
-              return
-            }
+            guard let playlistSnippetDict = (items[i] as Dictionary<String, AnyObject>)["snippet"] as? Dictionary<String, AnyObject> else { return }
             
             // Initialize a new dictionary and store the data of interest.
             var desiredPlaylistItemDataDict = Dictionary<String, AnyObject>()
             
             desiredPlaylistItemDataDict["title"] = playlistSnippetDict["title"]
-            desiredPlaylistItemDataDict["thumbnail"] = ((playlistSnippetDict["thumbnails"] as! Dictionary<String, AnyObject>)["default"] as! Dictionary<String, AnyObject>)["url"]
-            desiredPlaylistItemDataDict["videoID"] = (playlistSnippetDict["resourceId"] as! Dictionary<String, AnyObject>)["videoId"]
+            
+            guard let thumbnail = ((playlistSnippetDict["thumbnails"] as? Dictionary<String, AnyObject>)?["default"] as? Dictionary<String, AnyObject>)?["url"] else { return }
+            desiredPlaylistItemDataDict["thumbnail"] = thumbnail
+            
+            guard let videoId = (playlistSnippetDict["resourceId"] as? Dictionary<String, AnyObject>)?["videoId"] else { return }
+             desiredPlaylistItemDataDict["videoID"] = videoId
            
             self.videosArray.append(desiredPlaylistItemDataDict)
             
@@ -224,7 +210,7 @@ extension ViewController: UITableViewDelegate {
       getVideosForChannelAtIndex(index: indexPath.row)
     } else {
       let storyboard = UIStoryboard(name: "Main", bundle: nil)
-      let playerViewController = storyboard.instantiateViewController(withIdentifier: "PlayerViewController") as! PlayerViewController
+      guard let playerViewController = storyboard.instantiateViewController(withIdentifier: "PlayerViewController") as? PlayerViewController else { return }
       playerViewController.videoID = videosArray[indexPath.row]["videoID"] as? String
       
       self.navigationController?.pushViewController(playerViewController, animated: true)
@@ -248,30 +234,34 @@ extension ViewController: UITextFieldDelegate {
     let query = textField.text!
     let urlString = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=\(query)&type=\(type)&key=\(apiKey)"
     
-    let targetURL = NSURL(string: urlString)
-    performGetRequest(targetURL: targetURL!, completion: { (data, HTTPStatusCode, error) -> Void in
+    guard let targetURL = NSURL(string: urlString) else {
+      return true
+    }
+    
+    performGetRequest(targetURL: targetURL, completion: { (data, HTTPStatusCode, error) in
       if HTTPStatusCode == 200 && error == nil {
         do {
-          guard let data = data else {
-            return
-          }
-          guard let resultsDict = try JSONSerialization.jsonObject(with: data, options: []) as? Dictionary<String, AnyObject> else {
-            return
-          }
-          let items: Array<Dictionary<String, AnyObject>> = resultsDict["items"] as! Array<Dictionary<String, AnyObject>>
+          guard let data = data else { return }
+          guard let resultsDict = try JSONSerialization.jsonObject(with: data, options: []) as? Dictionary<String, AnyObject> else { return }
+          guard let items: Array<Dictionary<String, AnyObject>> = resultsDict["items"] as? Array<Dictionary<String, AnyObject>> else { return }
           for i in 0 ..< items.count {
-            let snippetDict = items[i]["snippet"] as! Dictionary<String, AnyObject>
+            guard let snippetDict = items[i]["snippet"] as? Dictionary<String, AnyObject> else { return }
             
             if self.segDisplayedContent.selectedSegmentIndex == 0 {
               // Keep the channel ID.
-              self.desiredChannelsArray.append(snippetDict["channelId"] as! String)
+              guard let channelId  = snippetDict["channelId"] as? String else { return }
+              self.desiredChannelsArray.append(channelId)
               self.tblVideos.reloadData()
             } else {
               // Create a new dictionary to store the video details.
               var videoDetailsDict = Dictionary<String, AnyObject>()
               videoDetailsDict["title"] = snippetDict["title"]
-              videoDetailsDict["thumbnail"] = ((snippetDict["thumbnails"] as! Dictionary<String, AnyObject>)["default"] as! Dictionary<String, AnyObject>)["url"]
-              videoDetailsDict["videoID"] = (items[i]["id"] as! Dictionary<String, AnyObject>)["videoId"]
+              
+              guard let thumbnail = ((snippetDict["thumbnails"] as? Dictionary<String, AnyObject>)?["default"] as? Dictionary<String, AnyObject>)?["url"] else { return }
+              videoDetailsDict["thumbnail"] = thumbnail
+              
+              guard let videoId = (items[i]["id"] as? Dictionary<String, AnyObject>)?["videoId"] else { return }
+              videoDetailsDict["videoID"] = videoId
               
               self.videosArray.append(videoDetailsDict)
               

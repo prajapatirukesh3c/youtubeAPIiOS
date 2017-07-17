@@ -16,9 +16,7 @@ class PlayerViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    guard let videoID = videoID else {
-      return
-    }
+    guard let videoID = videoID else { return }
     playerView.load(withVideoId: videoID)
   }
 }
